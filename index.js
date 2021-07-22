@@ -1,3 +1,4 @@
+const { request, response } = require('express')
 const express = require('express')
 const app = express()
 
@@ -34,6 +35,22 @@ app.get('/', (request, response) => {
 app.get('/api/persons', (request, response) => {
     console.log('get persons init');
     response.json(persons)
+})
+
+app.get('/info', (request, response) => {
+    console.log('get info init');
+    phonebook_length = persons.length
+    today = new Date
+    full_date = (today.toDateString()) + ' ' + (today.toTimeString())
+    console.log('date is:', full_date);
+    response.send(`The Phonebook currently has ${phonebook_length} entries<br/><br/> 
+    ${full_date}`)
+})
+
+app.get('/api/persons/:id', (request, response) => {
+    console.log('GET single person init');
+    response.send('<h1>hey</h1>')
+
 })
 
 const PORT = 3001
