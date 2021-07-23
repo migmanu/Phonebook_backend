@@ -67,6 +67,30 @@ app.delete('/api/persons/:id', (request, response) => {
     response.json(new_persons)
 })
 
+const generateID = () => {
+    return Math.floor(Math.random() * 30)
+}
+
+app.post('/api/persons', (request, response) => {
+    const body =request.body
+
+    if (!body.content) {
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+
+    const person = {
+        content: body.content,
+        important: body.important || false,
+        id: generateID()
+    }
+
+    persons = persons.concat(person)
+
+    response.json(person)
+})
+
 
 const PORT = 3001
 app.listen(PORT)
