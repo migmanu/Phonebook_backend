@@ -49,9 +49,24 @@ app.get('/info', (request, response) => {
 
 app.get('/api/persons/:id', (request, response) => {
     console.log('GET single person init');
-    response.send('<h1>hey</h1>')
+    const id = Number(request.params.id)
+    const person = persons.find(person => person.id === id)
 
+    if (person) {
+        response.json(person)
+    } else {
+        response.status(404).send('<h1>[404] No match found for selected ID</h1>').end()
+    }
 })
+
+app.delete('/api/persons/:id', (request, response) => {
+    console.log('DELETE person init');
+    const id = NUmber(request.params.id)
+    const persons = persons.filter(person => person.id !== id)
+
+    response.json(persons)
+})
+
 
 const PORT = 3001
 app.listen(PORT)
