@@ -61,10 +61,10 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
     console.log('DELETE person init');
-    const id = NUmber(request.params.id)
-    const persons = persons.filter(person => person.id !== id)
+    const id = Number(request.params.id)
+    const new_persons = persons.filter(person => person.id !== id)
 
-    response.json(persons)
+    response.json(new_persons)
 })
 
 
